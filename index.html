@@ -1,0 +1,265 @@
+<html>
+    <head>
+        <title>Pizza Index</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="The Pizza Index tracks pizza shop activity near Washington, D.C., as an indicator of government officials preparing for long nights of work.">
+        <meta name="keywords" content="Pizza Index, Washington D.C., government activity, pizza shop tracker, osint">
+        <meta name="author" content="Pizza Index Team">
+        <meta name="robots" content="index, follow">
+        
+    </head>
+    
+    <body>
+        <div id="background"></div>
+        <div id="primary">
+            <div id="left">
+                <h2>CURRENT PIZZA INDEX</h1>
+                <h1 id="score">N/A<h3 id="hundred">/100</h3></h1>
+                <h4 id="msg">Loading...</h4>                
+            </div>
+            <div id="right">
+                <a><img src="static/github.svg"></a>
+                <a><img src="static/i.svg"></a>
+                <a><img src="static/issue.svg"></a>
+            </div>
+        </div>
+        <div id="secondary">
+            <div class="content">
+                <h1>What is the pizza index?</h1>
+                <p>The Pizza Index refers to the sudden, trackable increase of takeout food orders (in this case pizza) made from government offices, particularly the Pentagon and the White House in the United States, before major international events unfold. </p>
+            </div>
+
+            <div class="content">
+                <h1>How is this number calculated?</h1>
+                <p>This site scrapes the live "Popularity" data from google maps from over 30 pizza locations near Washington, D.C., calculates the difference between the expected and observed load, and finds the average. This number is then normalized to a range between zero and one hundred using a cumulative distribution function.</p>
+            </div>
+
+            <div class="content">
+                <h1>Why did you create this script?</h1>
+                <p>¯\_(ツ)_/¯ </p>
+            </div>
+
+        </div>
+        
+    </body>
+</html>
+
+<style>
+
+html {
+    
+    font-family: monospace;
+    color: #dbdee1;
+}
+
+#background {
+    z-index: -1;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 150vh;
+    position: absolute;
+    background-image: url("static/background.png");
+}
+
+body {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#primary {
+    margin-block: 200px;
+    max-width: 600px;
+    width: 100%;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: row;
+    font-weight: 800;
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.268);
+}
+
+#secondary {
+    
+    min-width: 200px;
+    width: 50%;
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.content {
+    padding: 100px;
+}
+
+.content p {
+    font-size: 2em;
+}
+
+#left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#left h2 {
+    font-size: 3em;
+    opacity: 0.8;
+    margin: 0;
+    padding: 0;
+    line-height: 1em;
+}
+
+#left h1 {
+    font-size: 9em;
+    margin: 0;
+    padding: 0;
+    line-height: 1em;
+
+    position: relative;
+    
+    color: white;
+}
+
+#left h3 {
+    position: absolute;
+    font-size: 2em;
+    transform: translateX(180px) translateY(40px);
+}
+
+#left h4 {
+    margin: 0;
+    padding: 0;
+    line-height: 1em;
+    padding-bottom: 20px;
+
+    font-style: italic;
+}
+
+#right {
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+#right a {
+    aspect-ratio: 1;
+    width: 100%;
+    margin: 10px;
+    padding: 0px;
+}
+
+#right a img {
+    aspect-ratio: 1;
+    width: 100%;
+    border-radius: 100px;
+}
+
+#right a img:hover {
+    background-color: #18181a;
+    cursor: pointer;
+}
+
+</style>
+
+<script>
+
+window.addEventListener('scroll', () => {
+    const parallax = document.querySelector('#background');
+    const scrollPosition = window.scrollY;
+    const offset = scrollPosition * 0.9;
+    parallax.style.top = `+${offset}px`;
+});
+
+const messages = [
+    "Another day another dollar",
+    "Turn on the TV",
+    "Double check your snack supplies",
+    "Houston we have a problem",
+    "Pour a coffee, it's gonna be a long night",
+    "Welp, there goes your 401k.",
+    "Welcome to the apocalypse",
+    "Every man for himself"
+]
+
+const url = 'https://olibvrexvuhsaknckltd.supabase.co/rest/v1/main?select=value&key=eq.latest';
+const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9saWJ2cmV4dnVoc2FrbmNrbHRkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk4NjczNjMsImV4cCI6MjA2NTQ0MzM2M30.5zmEniAajYqFnMmqcVr5iSMgRBqZ7zNj9E4EDs7wPqY';
+
+console.log("Hi! If you are reading this, then you are probably interested in scraping the pizza index. Not to worry:")
+console.log('curl -X GET "https://olibvrexvuhsaknckltd.supabase.co/rest/v1/main?select=value&key=eq.latest" -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9saWJ2cmV4dnVoc2FrbmNrbHRkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk4NjczNjMsImV4cCI6MjA2NTQ0MzM2M30.5zmEniAajYqFnMmqcVr5iSMgRBqZ7zNj9E4EDs7wPqY"')
+console.log("Please don't abuse the service, as I'm only using the free tier and this is a just a weekend project for me. Hope it helps.")
+
+fetch(url, 
+    {
+        method: 'GET',
+        headers: {
+            'apikey': apiKey
+        }
+    }
+).then(response => 
+    {    
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    }
+).then(data => 
+    {
+        var data = JSON.parse(data[0].value)
+
+        const score = data.score
+        const epoch = data.epoch
+        const closed = data.closed
+
+        const msg_el = document.querySelector('#msg');
+        const score_el = document.querySelector('#score');
+        const hundred_el = document.querySelector('#hundred');
+        
+        const now = new Date().getTime() / 1000;
+
+        if (now > epoch + 60*10) {
+            window.location.href = '/panic.html';
+        }
+        
+        if (closed || score === -1) {
+            score_el.innerHTML = "Closed"
+            msg_el.innerHTML = "Stores are currently closed..."
+            hundred_el.innerHTML = ""
+        } else {
+            score_el.innerHTML = score
+                        
+            if (score < 10) {
+                msg_el.innerHTML = messages[0]
+            } else if (score < 20) {
+                msg_el.innerHTML = messages[1]
+            } else if (score < 40) {
+                msg_el.innerHTML = messages[2]
+            } else if (score < 60) {
+                msg_el.innerHTML = messages[3]
+            } else if (score < 80) {
+                msg_el.innerHTML = messages[4]
+            } else if (score < 90) {
+                msg_el.innerHTML = messages[5]
+            } else if (score < 95) {
+                msg_el.innerHTML = messages[6]
+            } else {
+                msg_el.innerHTML = messages[7]
+            } 
+        }
+
+    }
+).catch(error => 
+    {
+        console.error('Error:', error);
+    }
+);
+
+</script>
