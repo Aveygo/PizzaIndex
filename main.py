@@ -132,6 +132,8 @@ class Main:
             
         numbers = [i for i in numbers if not i is None]
 
+        print(numbers)
+
         if len(numbers) < 3:
             print("Could not compute score, might be bot detected or too early.")
             self.h.reset()

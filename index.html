@@ -225,8 +225,12 @@ fetch(url,
         
         const now = new Date().getTime() / 1000;
 
+        console.log(now)
+        console.log(epoch)
+        console.log(epoch + 60 * 60)
+
         if (now > epoch + 60*60) {
-            window.location.href = '/PizzaIndex/panic.html';
+            window.location.href = '/PizzaIndex/panic.html?error="too_old"';
         }
         
         if (closed || score === -1) {
