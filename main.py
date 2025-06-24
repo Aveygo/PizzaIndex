@@ -48,7 +48,7 @@ class History:
 
     def push(self, value):
         self.values.append([int(time.time()), value])
-        self.values = self.values[-100:]
+        self.values = self.values[-500:]
         self.write()
 
     def reset(self):

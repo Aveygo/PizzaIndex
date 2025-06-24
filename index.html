@@ -197,7 +197,7 @@ console.log("Hi! If you are reading this, then you are probably interested in sc
 console.log('curl -X GET "https://olibvrexvuhsaknckltd.supabase.co/rest/v1/main?select=value&key=eq.latest" -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9saWJ2cmV4dnVoc2FrbmNrbHRkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk4NjczNjMsImV4cCI6MjA2NTQ0MzM2M30.5zmEniAajYqFnMmqcVr5iSMgRBqZ7zNj9E4EDs7wPqY"')
 console.log("Please don't abuse the service, as I'm only using the free tier and this is a just a weekend project for me. Hope it helps.")
 
-fetch(url, 
+fetch(url, { cache: 'no-store' },
     {
         method: 'GET',
         headers: {
