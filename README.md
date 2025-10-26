@@ -1,6 +1,8 @@
 ## PizzaIndex
 
-Visit [here](https://aveygo.github.io/PizzaIndex/)
+archived!
+
+Visit ~~[here](https://aveygo.github.io/PizzaIndex/)~~
 
 ## What is the PizzaIndex
 The Pizza Index refers to the sudden, trackable increase of takeout food orders (in this case pizza) made from government offices, particularly the Pentagon and the White House in the United States, before major international events unfold. 
